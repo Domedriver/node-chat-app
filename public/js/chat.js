@@ -13,9 +13,19 @@ const locationTemplate = document.querySelector("#location-template").innerHTML;
 const sidebarTemplate = document.querySelector("#sidebar-template").innerHTML;
 
 // Options
-const { username, room } = Qs.parse(location.search, {
+// const { username, room } = Qs.parse(location.search, {
+//   ignoreQueryPrefix: true
+// });
+
+const query = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
+
+if (typeof query.room === "object") {
+  query.room = query.room[1];
+}
+
+const { username, room } = query;
 
 const autoscroll = () => {
   // get new message element

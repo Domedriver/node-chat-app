@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>The Chat App</title>
     <link rel="icon" href="./img/favicon.png" />
-    <link rel="stylesheet" href="./css/styles.min.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <div class="centered-form">
@@ -18,12 +18,19 @@
             name="username"
             placeholder="Display name"
             required
+            data-lpignore="true"
           />
           <label for="room">Room</label>
-          <input type="text" name="room" placeholder="Room" required />
+          <select name="room" id="room">
+            <option value="" disabled selected>Pick Room or Make One</option>
+            <option value="newRoom">NEW ROOM</option>
+          </select>
           <button>Join</button>
         </form>
       </div>
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

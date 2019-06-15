@@ -44,9 +44,21 @@ const getUsersInRoom = room => {
   return users.filter(user => user.room === room.toLowerCase());
 };
 
+const getRoomsAndUsers = () => {
+  return users.reduce((accumulator, currentValue) => {
+    if (currentValue.room in accumulator) {
+      accumulator[currentValue.room] += 1;
+    } else {
+      accumulator[currentValue.room] = 1;
+    }
+    return accumulator;
+  }, {});
+};
+
 module.exports = {
   addUser,
   removeUser,
   getUser,
-  getUsersInRoom
+  getUsersInRoom,
+  getRoomsAndUsers
 };

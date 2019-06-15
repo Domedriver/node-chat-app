@@ -8,7 +8,8 @@ const {
   addUser,
   removeUser,
   getUser,
-  getUsersInRoom
+  getUsersInRoom,
+  getRoomsAndUsers
 } = require("./utils/users");
 
 const app = express();
@@ -20,6 +21,11 @@ const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 io.on("connection", socket => {
+  socket.on("roomUserInfo", () => {
+    const users = getRoomsAndUsers();
+    socket.emit("appInfo", users);
+  });
+
   socket.on("join", ({ username, room }, cb) => {
     const { error, user } = addUser({ id: socket.id, username, room });
 
